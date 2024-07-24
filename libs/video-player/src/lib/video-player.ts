@@ -9,6 +9,7 @@ import { EventHandler } from "./event-handler";
 export class VideoPlayer {
   constructor(host: HTMLElement, apis: IApiService[]) {
     this.url$.pipe(takeUntil(this.destroyed$)).subscribe(url => {
+      console.warn('url', url);
       if (url === null) {
         this.playerInfo?.adapter?.destroy();
         this.playerInfo = null;
@@ -18,6 +19,7 @@ export class VideoPlayer {
         if (matchingApis.length === 0) {
           throw `No player found for url ${url}`;
         } else {
+          // console.warn('matching api', matchingApis);
           this.videoRequest$.next(matchingApis[0]);
         }
       }
@@ -121,8 +123,10 @@ export class VideoPlayer {
   public get url() {
     return this.url$.value;
   }
-  public set url(value: string | null) {
-    this.url$.next(value || null);
+  public set url(value: string | null | undefined) {
+    const x = value || null;
+    console.warn('x', x);
+    this.url$.next(x);
   }
   //#endregion
 
@@ -146,7 +150,7 @@ export class VideoPlayer {
   private invokeEvent<K extends keyof VideoEventMap>(ev: K, ...args: VideoEventMap[K]) {
     this.handlers
       .filter(h => h.event === ev)
-      .forEach(h => h.handler(args));
+      .forEach(h => h.handler(...args));
   }
   //#endregion
 

@@ -1,3 +1,3 @@
-import { ApiLoader } from "@mintplayer/player-provider";
+import { ApiPlugin } from "@mintplayer/player-provider";
 
-export const vimeoLoader: ApiLoader = () => import('@mintplayer/vimeo-player/api').then(m => new m.VimeoApiService());
+export const vimeoPlugin: ApiPlugin = () => import('@mintplayer/vimeo-player/api').then(m => new m.VimeoApiService());
