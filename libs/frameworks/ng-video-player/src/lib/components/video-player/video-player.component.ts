@@ -159,19 +159,19 @@ export class VideoPlayerComponent implements AfterViewInit, OnDestroy {
     this.apis.then((apis) => {
       this.player = new VideoPlayer(this.container.nativeElement, apis);
       fromVideoEvent(this.player, 'stateChange').pipe(takeUntilDestroyed(this.destroy))
-        .subscribe(([state]) => this.zoneEmit(this.playerStateChange, state));
+        .subscribe((state) => this.zoneEmit(this.playerStateChange, state));
       fromVideoEvent(this.player, 'isPipChange').pipe(takeUntilDestroyed(this.destroy))
-        .subscribe(([isPip]) => this.zoneEmit(this.isPipChange, isPip));
+        .subscribe((isPip) => this.zoneEmit(this.isPipChange, isPip));
       fromVideoEvent(this.player, 'isFullscreenChange').pipe(takeUntilDestroyed(this.destroy))
-        .subscribe(([isFullscreen]) => this.zoneEmit(this.isFullscreenChange, isFullscreen));
+        .subscribe((isFullscreen) => this.zoneEmit(this.isFullscreenChange, isFullscreen));
       fromVideoEvent(this.player, 'muteChange').pipe(takeUntilDestroyed(this.destroy))
-        .subscribe(([mute]) => this.zoneEmit(this.muteChange, mute));
+        .subscribe((mute) => this.zoneEmit(this.muteChange, mute));
       fromVideoEvent(this.player, 'volumeChange').pipe(takeUntilDestroyed(this.destroy))
-        .subscribe(([volume]) => this.zoneEmit(this.volumeChange, volume));
+        .subscribe((volume) => this.zoneEmit(this.volumeChange, volume));
       fromVideoEvent(this.player, 'capabilitiesChange').pipe(takeUntilDestroyed(this.destroy))
-        .subscribe(([capabilities]) => this.zoneEmit(this.capabilitiesChange, capabilities));
+        .subscribe((capabilities) => this.zoneEmit(this.capabilitiesChange, capabilities));
       fromVideoEvent(this.player, 'progressChange').pipe(takeUntilDestroyed(this.destroy))
-        .subscribe(([progress]) => this.zoneEmit(this.progressChange, progress));
+        .subscribe((progress) => this.zoneEmit(this.progressChange, progress));
     });
   }
 
